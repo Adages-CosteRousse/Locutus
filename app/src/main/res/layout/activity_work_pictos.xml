@@ -13,63 +13,39 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/linear_layout_frame_container_top1"
+            android:id="@+id/linear_layout_frame_top1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingLeft="0dp"
-            android:paddingRight="100dp">
+            android:layout_weight="1">
 
-            <LinearLayout
-                android:id="@+id/linear_layout_frame_top1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_weak"
-                android:paddingLeft="150dp"
-                android:paddingRight="@dimen/xml_padding">
-
-                <ImageView
-                    android:id="@+id/image_view_work_picto_top_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primary_weak"
-                    android:src="@drawable/dra_angry" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/image_view_work_picto_top_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/linearborder" />
         </LinearLayout>
 
-        <LinearLayout
+
+        <ImageView
+            android:id="@+id/image_view_work_picto_top_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:gravity="center">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/xml_padding"
-                android:background="@color/primary_weak">
-
-                <ImageView
-                    android:id="@+id/image_view_work_picto_top_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primary_weak"
-                    android:src="@drawable/dra_angry" />
-            </LinearLayout>
-        </LinearLayout>
+            android:background="@drawable/linearborder" />
 
         <ImageView
             android:id="@+id/image_view_work_picto_top_3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:background="@drawable/linearborder" />
 
         <ImageView
             android:id="@+id/image_view_work_picto_top_4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:background="@drawable/linearborder" />
     </LinearLayout>
 
     <LinearLayout
@@ -82,25 +58,29 @@
             android:id="@+id/image_view_work_picto_bottom_1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:background="@drawable/linearborder" />
 
         <ImageView
             android:id="@+id/image_view_work_picto_bottom_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:background="@drawable/linearborder" />
 
         <ImageView
             android:id="@+id/image_view_work_picto_bottom_3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:background="@drawable/linearborder" />
 
         <ImageView
             android:id="@+id/image_view_work_picto_bottom_4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:background="@drawable/linearborder" />
     </LinearLayout>
 
 </LinearLayout>

@@ -94,8 +94,8 @@ public class WorkPictosActivity extends AppCompatActivity {
 		ArrayList<LinearLayout> containers = new ArrayList<>();
 		ArrayList<LinearLayout> frames = new ArrayList<>();
 		
-		LinearLayout linearLayoutFrameContainerTop1 = findViewById(R.id.linear_layout_frame_container_top1);
-		containers.add(linearLayoutFrameContainerTop1);
+		//LinearLayout linearLayoutFrameContainerTop1 = findViewById(R.id.linear_layout_frame_container_top1);
+		//containers.add(linearLayoutFrameContainerTop1);
 		LinearLayout linearLayoutFrameTop1 = findViewById(R.id.linear_layout_frame_top1);
 		frames.add(linearLayoutFrameTop1);
 		ImageView imageViewTop1 = findViewById(R.id.image_view_work_picto_top_1);
@@ -127,9 +127,9 @@ public class WorkPictosActivity extends AppCompatActivity {
 			linearLayoutBottom.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 0f));
 		}
 		for (int i = 0; i < m_concepts.size(); i++) {
-			containers.get(i)
+			frames.get(i)
 					.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-			containers.get(i).getDisplay().getSize();
+			// containers.get(i).getDisplay().getSize();
 			//imageViews.get(i).setPadding(m_padding, m_padding, m_padding, m_padding);
 			if (m_concepts.get(i)
 					.getPicto()
