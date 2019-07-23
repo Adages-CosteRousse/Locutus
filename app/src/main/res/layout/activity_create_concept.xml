@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".controllers.CreateConceptActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:gravity="center"
+        android:text="@string/create_concept"
+        android:textColor="@color/primary_strong"
+        android:textSize="@dimen/title_size"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="70">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image_view_picto"
+                android:layout_width="@dimen/image_small"
+                android:layout_height="@dimen/image_small" />
+
+            <EditText
+                android:id="@+id/edit_text_new_concept_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/concept_name"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/button_add_picto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="@string/add_picto"
+                android:textColor="@color/primary_strong" />
+
+            <Button
+                android:id="@+id/button_add_sound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="@string/add_sound"
+                android:textColor="@color/primary_strong" />
+
+            <Button
+                android:id="@+id/button_add_picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="@string/add_picture"
+                android:textColor="@color/primary_strong" />
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:onClick="newConceptConfirm"
+            android:text="@string/confirm"
+            android:textColor="@color/primary_strong" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/primary_strong"
+            android:onClick="back"
+            android:text="@string/back_home"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

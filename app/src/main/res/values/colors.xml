@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // Basics
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    // Custom
+    <color name="primary_strong">#B00040</color>
+    <color name="primary_weak">#C04070</color>
+    <color name="white">#FFF</color>
+    <color name="check">#229444</color>
+</resources>

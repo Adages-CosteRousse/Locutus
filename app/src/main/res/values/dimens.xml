@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_margin">20dp</dimen>
+    <dimen name="xml_padding">20dp</dimen>
+    <dimen name="select_profile_margin">10dp</dimen>
+    <dimen name="select_profile_padding">5dp</dimen>
+    <dimen name="title_size">40sp</dimen>
+    <dimen name="margin_bottom">10dp</dimen>
+    <dimen name="margin_top">20dp</dimen>
+    <dimen name="text_medium">24sp</dimen>
+    <dimen name="image_small">150dp</dimen>
+    <dimen name="image_medium">250dp</dimen>
+    <dimen name="text_large">30sp</dimen>
+</resources>

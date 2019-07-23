@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="fr.costerousse.locutus">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <uses-feature
+        android:name="android.hardware.camera2.CameraManager"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".controllers.WorkPictosActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".controllers.AudioCaptureActivity" />
+        <activity android:name=".controllers.AddExistingSoundActivity" />
+        <activity android:name=".controllers.AddExistingImageActivity" />
+        <activity android:name=".controllers.ConceptActivity" />
+        <activity android:name=".controllers.CreateConceptActivity" />
+        <activity android:name=".controllers.TreeChoiceActivity" />
+        <activity android:name=".controllers.PictosActivity" />
+        <activity android:name=".controllers.PictoPicturesActivity" />
+        <activity android:name=".controllers.TreeActivity" />
+        <activity android:name=".controllers.UserProfileActivity" />
+        <activity android:name=".controllers.TreeManagementActivity" />
+        <activity android:name=".controllers.ConceptManagementActivity" />
+        <activity android:name=".controllers.ProfilesActivity" />
+        <activity android:name=".controllers.CreateProfileActivity" />
+        <activity android:name=".controllers.PreferencesActivity" />
+        <activity android:name=".controllers.HelpActivity" />
+        <activity android:name=".controllers.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
