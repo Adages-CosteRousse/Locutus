@@ -13,39 +13,64 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/linear_layout_frame_top1"
+            android:id="@+id/linear_layout_container_top1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/image_view_work_picto_top_1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/linearborder" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_strong" />
         </LinearLayout>
 
-
-        <ImageView
-            android:id="@+id/image_view_work_picto_top_2"
+        <LinearLayout
+            android:id="@+id/linear_layout_container_top2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/linearborder" />
+            android:background="@color/white"
+            android:gravity="center">
 
-        <ImageView
-            android:id="@+id/image_view_work_picto_top_3"
+            <ImageView
+                android:id="@+id/image_view_work_picto_top_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_strong" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_container_top3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/linearborder" />
+            android:background="@color/white"
+            android:gravity="center">
 
-        <ImageView
-            android:id="@+id/image_view_work_picto_top_4"
+            <ImageView
+                android:id="@+id/image_view_work_picto_top_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_strong" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_container_top4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/linearborder" />
+            android:background="@color/white"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/image_view_work_picto_top_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_strong" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -54,33 +79,65 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/image_view_work_picto_bottom_1"
+        <LinearLayout
+            android:id="@+id/linear_layout_container_bottom1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/linearborder" />
+            android:background="@color/white"
+            android:gravity="center">
 
-        <ImageView
-            android:id="@+id/image_view_work_picto_bottom_2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/linearborder" />
+            <ImageView
+                android:id="@+id/image_view_work_picto_bottom_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_strong" />
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/image_view_work_picto_bottom_3"
+        <LinearLayout
+            android:id="@+id/linear_layout_container_bottom2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/linearborder" />
+            android:background="@color/white"
+            android:gravity="center">
 
-        <ImageView
-            android:id="@+id/image_view_work_picto_bottom_4"
+            <ImageView
+                android:id="@+id/image_view_work_picto_bottom_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_strong" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_container_bottom3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/linearborder" />
+            android:background="@color/white"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/image_view_work_picto_bottom_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_strong" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_container_bottom4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@color/white"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/image_view_work_picto_bottom_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_strong" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

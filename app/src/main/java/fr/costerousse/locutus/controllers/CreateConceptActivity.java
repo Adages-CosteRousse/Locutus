@@ -76,13 +76,10 @@ public class CreateConceptActivity extends AppCompatActivity {
 	private boolean m_destroyPicto = false;
 	private boolean m_destroyPicture = false;
 	private String m_picto = null;
-	private boolean m_sharePicto = true;
 	private String m_sound = null;
 	private String m_soundPath = null;
 	private Uri m_soundUri = null;
-	private boolean m_shareSound = true;
 	private String m_picture = null;
-	private boolean m_sharePicture = true;
 	// View
 	private ImageView m_imageViewPhoto;
 	private EditText m_editTextConceptName;
@@ -275,7 +272,6 @@ public class CreateConceptActivity extends AppCompatActivity {
 			// EXISTING IMAGE
 			if (requestCode == ADD_EXISTING_PICTO || requestCode == ADD_EXISTING_PICTURE) {
 				if (requestCode == ADD_EXISTING_PICTO) {
-					m_sharePicto = false;
 					m_picto = data.getStringExtra("result");
 					if (m_picto != null && m_picto.startsWith("dra_")) {
 						try {
@@ -291,7 +287,6 @@ public class CreateConceptActivity extends AppCompatActivity {
 					}
 					System.out.println("CreateConceptActivity : onActivityResult : RESULT_OK && data != null : requestCode == ADD_EXISTING_PICTO : " + m_picto);
 				} else {
-					m_sharePicture = false;
 					m_picture = data.getStringExtra("result");
 					if (m_picture != null && m_picture.startsWith("dra_")) {
 						try {
@@ -311,7 +306,9 @@ public class CreateConceptActivity extends AppCompatActivity {
 			// GALLERY
 			else if (requestCode == IMPORT_PICTO || requestCode == IMPORT_PICTURE) {
 				System.out.println("CreateConceptActivity : onActivityResult : RESULT_OK && data != null : requestCode == IMPORT : " + data.getData());
+				// Retrieves data from intent
 				Uri resultUri = data.getData();
+				// Create file's name
 				Date currentTime = Calendar.getInstance()
 						.getTime();
 				String extension = null;
@@ -322,7 +319,7 @@ public class CreateConceptActivity extends AppCompatActivity {
 				String imageName = "gal_" + currentTime + extension;
 				File newFile = new File(getApplicationContext().getFilesDir()
 						.getAbsolutePath(), imageName);
-				
+				// Copy from the gallery to internal storage's file
 				InputStream inputStream = null;
 				OutputStream outputStream = null;
 				try {
@@ -350,12 +347,12 @@ public class CreateConceptActivity extends AppCompatActivity {
 					}
 				}
 				if (requestCode == IMPORT_PICTO) {
+					// Get file's path
 					m_picto = newFile.getAbsolutePath();
-					System.out.println("CreateConceptActivity : onActivityResult : RESULT_OK && data != null : requestCode == IMPORT_PICTO : " + m_picto);
+					// Allows the system to destroy the file if leaves without saving
 					m_destroyPicto = true;
-				} else {
+				} else { // Don't care at this
 					m_picture = newFile.getAbsolutePath();
-					System.out.println("CreateConceptActivity : onActivityResult : RESULT_OK && data != null : requestCode == IMPORT_PICTURE : " + m_picture);
 					m_destroyPicture = true;
 				}
 				m_imageViewPhoto.setImageDrawable(Drawable.createFromPath(newFile.getAbsolutePath()));
@@ -384,7 +381,6 @@ public class CreateConceptActivity extends AppCompatActivity {
 			}
 			// EXISTING SOUND
 			else if (requestCode == ADD_EXISTING_SOUND) {
-				m_shareSound = false;
 				m_sound = data.getStringExtra("result");
 				System.out.println("CreateConceptActivity : onActivityResult : RESULT_OK && data != null : requestCode == ADD_EXISTING_SOUND : " + m_sound);
 			}

@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="com.theartofdev.edmodo:android-image-cropper:2.5.1" />
         <activity
             android:name=".controllers.WorkPictosActivity"
             android:screenOrientation="landscape" />

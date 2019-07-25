@@ -723,9 +723,11 @@ public class ConceptActivity extends AppCompatActivity {
 	}
 	
 	//////////////////////////////////////////////////////////
-	// BACK (to MainActivity)
+	// BACK
 	/////////////
 	public void back(View view) {
-		finish();
+		Intent intent = new Intent(ConceptActivity.this, ConceptManagementActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
 	}
 }
