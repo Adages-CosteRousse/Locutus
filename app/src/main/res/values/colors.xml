@@ -10,4 +10,6 @@
     <color name="primary_weak">#C04070</color>
     <color name="white">#FFF</color>
     <color name="check">#229444</color>
+    <color name="pink">#FF1493</color>
+    <color name="yellow">#FFFF00</color>
 </resources>

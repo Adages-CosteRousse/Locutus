@@ -10,21 +10,38 @@
         android:id="@+id/linear_layout_work_pictos_top"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:id="@+id/linear_layout_container_top1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/image_view_work_picto_top_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_strong" />
+            <FrameLayout
+                android:id="@+id/frame_layout_top1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_background_top1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/image_view_work_picto_top1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/image_view_foreground_top1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -32,14 +49,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@color/white"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/image_view_work_picto_top_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_strong" />
+            <FrameLayout
+                android:id="@+id/frame_layout_top2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_background_top2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/image_view_work_picto_top2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/image_view_foreground_top2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -47,14 +80,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@color/white"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/image_view_work_picto_top_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_strong" />
+            <FrameLayout
+                android:id="@+id/frame_layout_top3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_background_top3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/image_view_work_picto_top3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/image_view_foreground_top3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -62,14 +111,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@color/white"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/image_view_work_picto_top_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_strong" />
+            <FrameLayout
+                android:id="@+id/frame_layout_top4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_background_top4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/image_view_work_picto_top4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/image_view_foreground_top4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -84,14 +149,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@color/white"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/image_view_work_picto_bottom_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_strong" />
+            <FrameLayout
+                android:id="@+id/frame_layout_bottom1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_background_bottom1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/image_view_work_picto_bottom1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/image_view_foreground_bottom1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -99,14 +180,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@color/white"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/image_view_work_picto_bottom_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_strong" />
+            <FrameLayout
+                android:id="@+id/frame_layout_bottom2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_background_bottom2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/image_view_work_picto_bottom2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/image_view_foreground_bottom2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -114,14 +211,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@color/white"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/image_view_work_picto_bottom_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_strong" />
+            <FrameLayout
+                android:id="@+id/frame_layout_bottom3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_background_bottom3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/image_view_work_picto_bottom3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/image_view_foreground_bottom3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -129,14 +242,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@color/white"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/image_view_work_picto_bottom_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_strong" />
+            <FrameLayout
+                android:id="@+id/frame_layout_bottom4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_view_background_bottom4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/image_view_work_picto_bottom4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/image_view_foreground_bottom4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 

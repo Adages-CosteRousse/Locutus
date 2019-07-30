@@ -44,6 +44,7 @@ import java.util.concurrent.ExecutionException;
 import fr.costerousse.locutus.R;
 import fr.costerousse.locutus.db.DatabaseClient;
 import fr.costerousse.locutus.models.Concept;
+import id.zelory.compressor.Compressor;
 
 
 public class CreateConceptActivity extends AppCompatActivity {
@@ -345,6 +346,11 @@ public class CreateConceptActivity extends AppCompatActivity {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				}
+				try {
+					newFile = new Compressor(this).compressToFile(newFile);
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 				if (requestCode == IMPORT_PICTO) {
 					// Get file's path

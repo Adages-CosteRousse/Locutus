@@ -54,7 +54,7 @@ public class DatabaseClient {
 			
 			// PROFILES
 			db.execSQL("INSERT INTO profile (first_name, last_name, year_of_birth, applications_launcher, default_user_mode, tree, max_frames_per_display, scrolling_time, sound_feedback, frame_style, frame_size, highlight_intensity, frame_color) VALUES(\"Prénom1\", \"NOM1\", 2011, 0, \"scrolling\", \"none\", 4, 4, 0, \"classic\", 5, 20, \"black\")");
-			db.execSQL("INSERT INTO profile (first_name, last_name, year_of_birth, applications_launcher, default_user_mode, tree, max_frames_per_display, scrolling_time, sound_feedback, frame_style, frame_size, highlight_intensity, frame_color) VALUES(\"Prénom2\", \"NOM2\", 2013, 0, \"tactile\", \"none\", 4, 4, 0, \"red_light\", 5, 20, \"pink\")");
+			db.execSQL("INSERT INTO profile (first_name, last_name, year_of_birth, applications_launcher, default_user_mode, tree, max_frames_per_display, scrolling_time, sound_feedback, frame_style, frame_size, highlight_intensity, frame_color) VALUES(\"Prénom2\", \"NOM2\", 2013, 0, \"tactile\", \"none\", 4, 4, 0, \"redLight\", 5, 20, \"pink\")");
 			
 			// CONCEPTS
 			db.execSQL("INSERT INTO concept (name, picto, sound, picture) VALUES(\"bonjour\", \"dra_hello\", \"sound_bonjour\", \"none\")");

@@ -78,9 +78,6 @@ public class ConceptActivity extends AppCompatActivity {
 	private Button m_buttonPlay;
 	private Button m_buttonDelete;
 	private Button m_buttonSave;
-	private boolean m_sharePicto = true;
-	private boolean m_sharePicture = true;
-	private boolean m_shareSound = true;
 	private boolean m_destroyPicto = false;
 	private boolean m_destroyPicture = false;
 	private Uri m_soundUri;
@@ -149,7 +146,7 @@ public class ConceptActivity extends AppCompatActivity {
 		} else {
 			m_imageViewPicto.setImageDrawable(Drawable.createFromPath(m_concept.getPicto()));
 		}
-		System.out.println(m_concept.getPicture());
+		
 		if (!m_concept.getPicture()
 				.equals("none")) {
 			if (m_concept.getPicture()
@@ -447,7 +444,6 @@ public class ConceptActivity extends AppCompatActivity {
 			// EXISTING IMAGE
 			if (requestCode == ADD_EXISTING_PICTO || requestCode == ADD_EXISTING_PICTURE) {
 				if (requestCode == ADD_EXISTING_PICTO) {
-					m_sharePicto = false;
 					m_concept.setPicto(data.getStringExtra("result"));
 					if (m_concept.getPicto()
 							.startsWith("dra_")) {
@@ -464,7 +460,6 @@ public class ConceptActivity extends AppCompatActivity {
 					}
 					System.out.println("CreateConceptActivity : onActivityResult : RESULT_OK && data != null : requestCode == ADD_EXISTING_PICTO : " + m_concept.getPicto());
 				} else {
-					m_sharePicture = false;
 					m_concept.setPicture(data.getStringExtra("result"));
 					if (m_concept.getPicture()
 							.startsWith("dra_")) {
@@ -560,7 +555,6 @@ public class ConceptActivity extends AppCompatActivity {
 			}
 			// EXISTING SOUND
 			else if (requestCode == ADD_EXISTING_SOUND) {
-				m_shareSound = false;
 				m_concept.setSound(data.getStringExtra("result"));
 				
 				try {

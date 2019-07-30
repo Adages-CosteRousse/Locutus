@@ -162,7 +162,7 @@ public class PreferencesActivity extends AppCompatActivity {
 		}
 		
 		// FRAME STYLE
-		m_numberPickerSizeOrIntensity.setMinValue(5);
+		m_numberPickerSizeOrIntensity.setMinValue(0);
 		m_numberPickerSizeOrIntensity.setMaxValue(100);
 		switch (m_profile.getFrameStyle()) {
 			case "classic":
