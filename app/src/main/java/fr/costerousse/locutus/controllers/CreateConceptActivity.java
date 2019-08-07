@@ -347,6 +347,7 @@ public class CreateConceptActivity extends AppCompatActivity {
 						e.printStackTrace();
 					}
 				}
+				// Compressing image
 				try {
 					newFile = new Compressor(this).compressToFile(newFile);
 				} catch (IOException e) {
