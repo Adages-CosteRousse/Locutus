@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ import fr.costerousse.locutus.models.Concept;
 import fr.costerousse.locutus.models.Profile;
 
 
-public class WorkPictosActivity extends AppCompatActivity {
+public class ScrollPictosActivity extends AppCompatActivity {
 	//////////////////////////////////////////////////////////
 	// Fields
 	/////////////
@@ -46,6 +47,10 @@ public class WorkPictosActivity extends AppCompatActivity {
 	//
 	private MediaPlayer m_mediaPlayer = null;
 	private boolean m_play = true;
+	// Scrolling
+	private int m_currentConcept = 0;
+	private boolean m_scroll = true;
+	private Thread m_thread;
 	
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
@@ -95,6 +100,7 @@ public class WorkPictosActivity extends AppCompatActivity {
 		}
 		
 		// Retrieves view's items
+		LinearLayout linearLayoutWork = findViewById(R.id.linear_layout_work_pictos);
 		LinearLayout linearLayoutBottom = findViewById(R.id.linear_layout_work_pictos_bottom);
 		final ArrayList<LinearLayout> containers = new ArrayList<>();
 		final ArrayList<ImageView> foregrounds = new ArrayList<>();
@@ -151,7 +157,7 @@ public class WorkPictosActivity extends AppCompatActivity {
 		ImageView backgroundBottom1 = findViewById(R.id.image_view_background_bottom1);
 		backgrounds.add(backgroundBottom1);
 		
-		// Image 5
+		// Image 6
 		LinearLayout linearLayoutContainerBottom2 = findViewById(R.id.linear_layout_container_bottom2);
 		containers.add(linearLayoutContainerBottom2);
 		ImageView foregroundBottom2 = findViewById(R.id.image_view_foreground_bottom2);
@@ -161,7 +167,7 @@ public class WorkPictosActivity extends AppCompatActivity {
 		ImageView backgroundBottom2 = findViewById(R.id.image_view_background_bottom2);
 		backgrounds.add(backgroundBottom2);
 		
-		// Image 5
+		// Image 7
 		LinearLayout linearLayoutContainerBottom3 = findViewById(R.id.linear_layout_container_bottom3);
 		containers.add(linearLayoutContainerBottom3);
 		ImageView foregroundBottom3 = findViewById(R.id.image_view_foreground_bottom3);
@@ -171,7 +177,7 @@ public class WorkPictosActivity extends AppCompatActivity {
 		ImageView backgroundBottom3 = findViewById(R.id.image_view_background_bottom3);
 		backgrounds.add(backgroundBottom3);
 		
-		// Image 5
+		// Image 8
 		LinearLayout linearLayoutContainerBottom4 = findViewById(R.id.linear_layout_container_bottom4);
 		containers.add(linearLayoutContainerBottom4);
 		ImageView foregroundBottom4 = findViewById(R.id.image_view_foreground_bottom4);
@@ -305,62 +311,118 @@ public class WorkPictosActivity extends AppCompatActivity {
 								.getPicto()));
 			}
 			
-			imageViews.get(i)
-					.setOnTouchListener(new View.OnTouchListener() {
-						@Override
-						public boolean onTouch(View view, MotionEvent motionEvent) {
-							if (m_play) {
-								if (m_mediaPlayer != null) {
-									m_mediaPlayer.release();
-								}
-								if (m_concepts.get(position)
-										.getSound()
-										.startsWith("sound_")) {
-									try {
-										m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(position)
-												.getSound())
-												.getInt(R.raw.class));
-									} catch (IllegalAccessException e) {
-										e.printStackTrace();
-									} catch (NoSuchFieldException e) {
-										e.printStackTrace();
-									}
-								} else {
-									m_mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(m_concepts.get(position)
-											.getSound())));
-								}
-								if (m_mediaPlayer != null) {
-									m_mediaPlayer.start();
-								}
-								m_play = false;
+			// SCROLLING
+			m_thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					while (m_scroll) {
+						if (m_concepts.get(m_currentConcept)
+								.getSound()
+								.startsWith("sound_")) {
+							try {
+								m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(m_currentConcept)
+										.getSound())
+										.getInt(R.raw.class));
+								m_mediaPlayer.setVolume(0.4f, 0.4f);
+							} catch (IllegalAccessException e) {
+								e.printStackTrace();
+							} catch (NoSuchFieldException e) {
+								e.printStackTrace();
 							}
-							
+						} else {
+							m_mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(m_concepts.get(m_currentConcept)
+									.getSound())));
+						}
+						if (m_mediaPlayer != null) {
+							m_mediaPlayer.start();
 							if (m_profile.getFrameStyle()
 									.equals("classic") || m_profile.getFrameStyle()
 									.equals("checkerboard")) {
-								backgrounds.get(position)
+								backgrounds.get(m_currentConcept)
 										.setVisibility(View.VISIBLE);
 							} else {
-								foregrounds.get(position)
+								foregrounds.get(m_currentConcept)
 										.setVisibility(View.VISIBLE);
 							}
-							
-							if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-								backgrounds.get(position)
-										.setVisibility(View.INVISIBLE);
-								foregrounds.get(position)
-										.setVisibility(View.INVISIBLE);
-								m_play = true;
-							}
-							
-							return true;
+							m_mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+								@Override
+								public void onCompletion(MediaPlayer mediaPlayer) {
+									m_mediaPlayer.release();
+									backgrounds.get(m_currentConcept)
+											.setVisibility(View.INVISIBLE);
+									foregrounds.get(m_currentConcept)
+											.setVisibility(View.INVISIBLE);
+								}
+							});
 						}
-					});
+						
+						if (m_currentConcept == m_concepts.size() - 1) {
+							m_currentConcept = 0;
+						} else {
+							m_currentConcept++;
+						}
+						
+						SystemClock.sleep(5000);
+					}
+				}
+			});
+			
+			m_thread.start();
+			
+			linearLayoutWork.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View view, MotionEvent motionEvent) {
+					if (m_play) {
+						if (m_mediaPlayer != null) {
+							m_mediaPlayer.release();
+						}
+						if (m_concepts.get(m_currentConcept)
+								.getSound()
+								.startsWith("sound_")) {
+							try {
+								m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(m_currentConcept)
+										.getSound())
+										.getInt(R.raw.class));
+							} catch (IllegalAccessException e) {
+								e.printStackTrace();
+							} catch (NoSuchFieldException e) {
+								e.printStackTrace();
+							}
+						} else {
+							m_mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(m_concepts.get(m_currentConcept)
+									.getSound())));
+						}
+						if (m_mediaPlayer != null) {
+							m_mediaPlayer.start();
+						}
+						m_play = false;
+					}
+					
+					if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+						m_play = true;
+					}
+					
+					return true;
+				}
+			});
 		}
-		
-		
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (m_scroll == false) {
+			m_scroll = true;
+			m_thread.start();
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		m_scroll = false;
+		m_thread.interrupt();
+	}
 	
 	//////////////////////////////////////////////////////////
 	// GetProfiles
