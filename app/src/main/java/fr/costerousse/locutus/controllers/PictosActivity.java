@@ -169,10 +169,18 @@ public class PictosActivity extends AppCompatActivity {
 			Toast.makeText(this, R.string.at_least_one_concept, Toast.LENGTH_SHORT)
 					.show();
 		} else {
-			Intent intent = new Intent(PictosActivity.this, WorkPictosActivity.class);
-			intent.putIntegerArrayListExtra(WorkPictosActivity.CONCEPTS_LIST, m_concepts);
-			intent.putExtra(WorkPictosActivity.PROFILE_POSITION, m_profilePosition);
-			startActivity(intent);
+			if (m_profile.getDefaultUserMode()
+					.equals("scrolling")) {
+				Intent intent = new Intent(PictosActivity.this, ScrollPictosActivity.class);
+				intent.putIntegerArrayListExtra(ScrollPictosActivity.CONCEPTS_LIST, m_concepts);
+				intent.putExtra(ScrollPictosActivity.PROFILE_POSITION, m_profilePosition);
+				startActivity(intent);
+			} else {
+				Intent intent = new Intent(PictosActivity.this, ClickPictosActivity.class);
+				intent.putIntegerArrayListExtra(ClickPictosActivity.CONCEPTS_LIST, m_concepts);
+				intent.putExtra(ClickPictosActivity.PROFILE_POSITION, m_profilePosition);
+				startActivity(intent);
+			}
 		}
 	}
 	

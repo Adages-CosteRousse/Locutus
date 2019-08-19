@@ -19,8 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".controllers.ScrollPictosActivity"></activity>
         <activity
-            android:name=".controllers.WorkPictosActivity"
+            android:name=".controllers.ClickPictosActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".controllers.AudioCaptureActivity" />
         <activity android:name=".controllers.AddExistingSoundActivity" />
