@@ -8,7 +8,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +46,7 @@ public class ScrollPictosActivity extends AppCompatActivity {
 	//
 	private MediaPlayer m_mediaPlayer = null;
 	private boolean m_play = true;
+	private boolean m_pause = false;
 	// Scrolling
 	private int m_currentConcept = 0;
 	private boolean m_scroll = true;
@@ -311,64 +311,6 @@ public class ScrollPictosActivity extends AppCompatActivity {
 								.getPicto()));
 			}
 			
-			// SCROLLING
-			m_thread = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					while (m_scroll) {
-						if (m_concepts.get(m_currentConcept)
-								.getSound()
-								.startsWith("sound_")) {
-							try {
-								m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(m_currentConcept)
-										.getSound())
-										.getInt(R.raw.class));
-								m_mediaPlayer.setVolume(0.4f, 0.4f);
-							} catch (IllegalAccessException e) {
-								e.printStackTrace();
-							} catch (NoSuchFieldException e) {
-								e.printStackTrace();
-							}
-						} else {
-							m_mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(m_concepts.get(m_currentConcept)
-									.getSound())));
-						}
-						if (m_mediaPlayer != null) {
-							m_mediaPlayer.start();
-							if (m_profile.getFrameStyle()
-									.equals("classic") || m_profile.getFrameStyle()
-									.equals("checkerboard")) {
-								backgrounds.get(m_currentConcept)
-										.setVisibility(View.VISIBLE);
-							} else {
-								foregrounds.get(m_currentConcept)
-										.setVisibility(View.VISIBLE);
-							}
-							m_mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-								@Override
-								public void onCompletion(MediaPlayer mediaPlayer) {
-									m_mediaPlayer.release();
-									backgrounds.get(m_currentConcept)
-											.setVisibility(View.INVISIBLE);
-									foregrounds.get(m_currentConcept)
-											.setVisibility(View.INVISIBLE);
-								}
-							});
-						}
-						
-						if (m_currentConcept == m_concepts.size() - 1) {
-							m_currentConcept = 0;
-						} else {
-							m_currentConcept++;
-						}
-						
-						SystemClock.sleep(5000);
-					}
-				}
-			});
-			
-			m_thread.start();
-			
 			linearLayoutWork.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -406,22 +348,130 @@ public class ScrollPictosActivity extends AppCompatActivity {
 				}
 			});
 		}
+		
+		// SCROLLING
+		m_thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				while (m_scroll) {
+					if (!m_pause) {
+						// PLAY SOUND
+						if (m_concepts.get(m_currentConcept)
+								.getSound()
+								.startsWith("sound_")) {
+							try {
+								m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(m_currentConcept)
+										.getSound())
+										.getInt(R.raw.class));
+								m_mediaPlayer.setVolume(0.4f, 0.4f);
+							} catch (IllegalAccessException e) {
+								e.printStackTrace();
+							} catch (NoSuchFieldException e) {
+								e.printStackTrace();
+							}
+						} else {
+							m_mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(m_concepts.get(m_currentConcept)
+									.getSound())));
+						}
+						if (m_mediaPlayer != null) {
+							m_mediaPlayer.start();
+							m_mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+								@Override
+								public void onCompletion(MediaPlayer mediaPlayer) {
+									m_mediaPlayer.release();
+								}
+							});
+						}
+						
+						// UPDATE UI -> MAKES FRAME VISIBLE
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								System.out.println(m_currentConcept);
+								if (m_profile.getFrameStyle()
+										.equals("classic") || m_profile.getFrameStyle()
+										.equals("checkerboard")) {
+									backgrounds.get(m_currentConcept)
+											.setVisibility(View.VISIBLE);
+								} else {
+									foregrounds.get(m_currentConcept)
+											.setVisibility(View.VISIBLE);
+								}
+							}
+						});
+						
+						// SLEEP
+						try {
+							Thread.sleep(m_profile.getScrollingTime() * 1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						
+						// RE-UPDATE UI -> MAKES FRAME INVISIBLE
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								System.out.println("blablabla");
+								backgrounds.get(m_currentConcept)
+										.setVisibility(View.INVISIBLE);
+								foregrounds.get(m_currentConcept)
+										.setVisibility(View.INVISIBLE);
+								
+								// INCREMENT CONCEPT TO PLAY
+								if (m_currentConcept == m_concepts.size() - 1) {
+									m_currentConcept = 0;
+								} else {
+									m_currentConcept++;
+								}
+							}
+						});
+						
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					} else {
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				
+				Thread.currentThread()
+						.interrupt();
+			}
+		});
+		
+		m_thread.start();
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (m_scroll == false) {
-			m_scroll = true;
-			m_thread.start();
-		}
+		m_pause = false;
+		System.out.println(m_thread.isAlive());
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
+		m_mediaPlayer.release();
+		m_pause = true;
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 		m_scroll = false;
-		m_thread.interrupt();
 	}
 	
 	//////////////////////////////////////////////////////////
