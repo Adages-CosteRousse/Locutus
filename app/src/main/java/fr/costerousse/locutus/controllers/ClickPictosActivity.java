@@ -48,6 +48,9 @@ public class ClickPictosActivity extends AppCompatActivity {
 	private MediaPlayer m_mediaPlayer = null;
 	private boolean m_play = true;
 	
+	//////////////////////////////////////////////////////////
+	// ON CREATE
+	/////////////
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +63,7 @@ public class ClickPictosActivity extends AppCompatActivity {
 		try {
 			concepts = new GetConcepts().execute()
 					.get();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		
@@ -71,9 +72,7 @@ public class ClickPictosActivity extends AppCompatActivity {
 			m_profile = new GetProfiles().execute()
 					.get()
 					.get(getIntent().getIntExtra("profile_position", 0));
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		m_padding = m_profile.getFrameSize();
@@ -152,7 +151,7 @@ public class ClickPictosActivity extends AppCompatActivity {
 		ImageView backgroundBottom1 = findViewById(R.id.image_view_background_bottom1);
 		backgrounds.add(backgroundBottom1);
 		
-		// Image 5
+		// Image 6
 		LinearLayout linearLayoutContainerBottom2 = findViewById(R.id.linear_layout_container_bottom2);
 		containers.add(linearLayoutContainerBottom2);
 		ImageView foregroundBottom2 = findViewById(R.id.image_view_foreground_bottom2);
@@ -162,7 +161,7 @@ public class ClickPictosActivity extends AppCompatActivity {
 		ImageView backgroundBottom2 = findViewById(R.id.image_view_background_bottom2);
 		backgrounds.add(backgroundBottom2);
 		
-		// Image 5
+		// Image 7
 		LinearLayout linearLayoutContainerBottom3 = findViewById(R.id.linear_layout_container_bottom3);
 		containers.add(linearLayoutContainerBottom3);
 		ImageView foregroundBottom3 = findViewById(R.id.image_view_foreground_bottom3);
@@ -172,7 +171,7 @@ public class ClickPictosActivity extends AppCompatActivity {
 		ImageView backgroundBottom3 = findViewById(R.id.image_view_background_bottom3);
 		backgrounds.add(backgroundBottom3);
 		
-		// Image 5
+		// Image 8
 		LinearLayout linearLayoutContainerBottom4 = findViewById(R.id.linear_layout_container_bottom4);
 		containers.add(linearLayoutContainerBottom4);
 		ImageView foregroundBottom4 = findViewById(R.id.image_view_foreground_bottom4);
@@ -295,9 +294,7 @@ public class ClickPictosActivity extends AppCompatActivity {
 							.setImageResource(R.drawable.class.getField(m_concepts.get(i)
 									.getPicto())
 									.getInt(R.drawable.class));
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (NoSuchFieldException e) {
+				} catch (IllegalAccessException | NoSuchFieldException e) {
 					e.printStackTrace();
 				}
 			} else {
@@ -321,9 +318,7 @@ public class ClickPictosActivity extends AppCompatActivity {
 										m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(position)
 												.getSound())
 												.getInt(R.raw.class));
-									} catch (IllegalAccessException e) {
-										e.printStackTrace();
-									} catch (NoSuchFieldException e) {
+									} catch (IllegalAccessException | NoSuchFieldException e) {
 										e.printStackTrace();
 									}
 								} else {
@@ -358,8 +353,6 @@ public class ClickPictosActivity extends AppCompatActivity {
 						}
 					});
 		}
-		
-		
 	}
 	
 	

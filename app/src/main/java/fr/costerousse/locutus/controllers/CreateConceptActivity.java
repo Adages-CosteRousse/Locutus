@@ -80,7 +80,7 @@ public class CreateConceptActivity extends AppCompatActivity {
 	private String m_sound = null;
 	private String m_soundPath = null;
 	private Uri m_soundUri = null;
-	private String m_picture = null;
+	private String m_picture = "none";
 	// View
 	private ImageView m_imageViewPhoto;
 	private EditText m_editTextConceptName;
@@ -119,9 +119,7 @@ public class CreateConceptActivity extends AppCompatActivity {
 		try {
 			m_concepts = new GetConcepts().execute()
 					.get();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		
@@ -278,9 +276,7 @@ public class CreateConceptActivity extends AppCompatActivity {
 						try {
 							m_imageViewPhoto.setImageResource(R.drawable.class.getField(m_picto)
 									.getInt(R.drawable.class));
-						} catch (IllegalAccessException e) {
-							e.printStackTrace();
-						} catch (NoSuchFieldException e) {
+						} catch (IllegalAccessException | NoSuchFieldException e) {
 							e.printStackTrace();
 						}
 					} else {
@@ -293,9 +289,7 @@ public class CreateConceptActivity extends AppCompatActivity {
 						try {
 							m_imageViewPhoto.setImageResource(R.drawable.class.getField(m_picture)
 									.getInt(R.drawable.class));
-						} catch (IllegalAccessException e) {
-							e.printStackTrace();
-						} catch (NoSuchFieldException e) {
+						} catch (IllegalAccessException | NoSuchFieldException e) {
 							e.printStackTrace();
 						}
 					} else {
@@ -331,8 +325,6 @@ public class CreateConceptActivity extends AppCompatActivity {
 					if (inputStream != null) {
 						IOUtils.copy(inputStream, outputStream);
 					}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {
@@ -510,8 +502,6 @@ public class CreateConceptActivity extends AppCompatActivity {
 			if (inputStream != null) {
 				IOUtils.copy(inputStream, outputStream);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -545,8 +535,6 @@ public class CreateConceptActivity extends AppCompatActivity {
 			if (inputStream != null) {
 				IOUtils.copy(inputStream, outputStream);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -587,7 +575,7 @@ public class CreateConceptActivity extends AppCompatActivity {
 			@Override
 			protected Concept doInBackground(Void... voids) {
 				Concept concept = new Concept(sConceptName, sConceptPicto, sConceptSound);
-				if (sConceptPicture != null) {
+				if (!sConceptPicture.equals("none")) {
 					concept.setPicture(sConceptPicture);
 					System.out.println("CreateConceptActivity : saveConcept : SaveConcept : sConceptPicture != null : " + sConceptPicture);
 				}

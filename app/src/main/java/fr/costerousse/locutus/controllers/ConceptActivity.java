@@ -117,9 +117,7 @@ public class ConceptActivity extends AppCompatActivity {
 			m_concept = new GetConcepts().execute()
 					.get()
 					.get(m_conceptPosition);
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		
@@ -138,9 +136,7 @@ public class ConceptActivity extends AppCompatActivity {
 			try {
 				m_imageViewPicto.setImageResource(R.drawable.class.getField(m_concept.getPicto())
 						.getInt(R.drawable.class));
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (NoSuchFieldException e) {
+			} catch (IllegalAccessException | NoSuchFieldException e) {
 				e.printStackTrace();
 			}
 		} else {
@@ -154,9 +150,7 @@ public class ConceptActivity extends AppCompatActivity {
 				try {
 					m_imageViewPicture.setImageResource(R.drawable.class.getField(m_concept.getPicture())
 							.getInt(R.drawable.class));
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (NoSuchFieldException e) {
+				} catch (IllegalAccessException | NoSuchFieldException e) {
 					e.printStackTrace();
 				}
 			} else {
@@ -251,9 +245,7 @@ public class ConceptActivity extends AppCompatActivity {
 			try {
 				m_mediaPlayerSound = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concept.getSound())
 						.getInt(R.raw.class));
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (NoSuchFieldException e) {
+			} catch (IllegalAccessException | NoSuchFieldException e) {
 				e.printStackTrace();
 			}
 		} else {
@@ -378,8 +370,6 @@ public class ConceptActivity extends AppCompatActivity {
 			if (inputStream != null) {
 				IOUtils.copy(inputStream, outputStream);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -413,8 +403,6 @@ public class ConceptActivity extends AppCompatActivity {
 			if (inputStream != null) {
 				IOUtils.copy(inputStream, outputStream);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -450,9 +438,7 @@ public class ConceptActivity extends AppCompatActivity {
 						try {
 							m_imageViewPicto.setImageResource(R.drawable.class.getField(m_concept.getPicto())
 									.getInt(R.drawable.class));
-						} catch (IllegalAccessException e) {
-							e.printStackTrace();
-						} catch (NoSuchFieldException e) {
+						} catch (IllegalAccessException | NoSuchFieldException e) {
 							e.printStackTrace();
 						}
 					} else {
@@ -466,9 +452,7 @@ public class ConceptActivity extends AppCompatActivity {
 						try {
 							m_imageViewPicture.setImageResource(R.drawable.class.getField(m_concept.getPicture())
 									.getInt(R.drawable.class));
-						} catch (IllegalAccessException e) {
-							e.printStackTrace();
-						} catch (NoSuchFieldException e) {
+						} catch (IllegalAccessException | NoSuchFieldException e) {
 							e.printStackTrace();
 						}
 					} else {
@@ -502,8 +486,6 @@ public class ConceptActivity extends AppCompatActivity {
 					if (inputStream != null) {
 						IOUtils.copy(inputStream, outputStream);
 					}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {
@@ -560,9 +542,7 @@ public class ConceptActivity extends AppCompatActivity {
 				try {
 					m_mediaPlayerSound = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concept.getSound())
 							.getInt(R.raw.class));
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (NoSuchFieldException e) {
+				} catch (IllegalAccessException | NoSuchFieldException e) {
 					e.printStackTrace();
 				}
 				m_buttonPlay.setOnClickListener(new View.OnClickListener() {

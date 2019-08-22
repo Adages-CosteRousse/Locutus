@@ -93,7 +93,7 @@ public class UserProfileActivity extends AppCompatActivity {
 	/////////////
 	public void gotoPictoPictures(View view) {
 		Intent intent = new Intent(UserProfileActivity.this, PictoPicturesActivity.class);
-		intent.putExtra(PictosActivity.PROFILE_POSITION, m_profilePosition);
+		intent.putExtra(PictoPicturesActivity.PROFILE_POSITION, m_profilePosition);
 		startActivity(intent);
 	}
 	

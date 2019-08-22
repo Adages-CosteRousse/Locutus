@@ -5,5 +5,53 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".controllers.PictoPicturesActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:gravity="center"
+        android:text="@string/select_concepts"
+        android:textColor="@color/primary_strong"
+        android:textSize="@dimen/title_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_pick_concepts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center" />
+
+    <ListView
+        android:id="@+id/list_view_pick_concepts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        android:drawSelectorOnTop="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:onClick="gotoWorkPictoPictures"
+            android:text="@string/confirm"
+            android:textColor="@color/primary_strong" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/primary_strong"
+            android:onClick="back"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

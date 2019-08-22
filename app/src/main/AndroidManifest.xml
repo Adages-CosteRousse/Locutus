@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".controllers.CreateTreeActivity"></activity>
+        <activity android:name=".controllers.ClickPictoPicturesActivity"></activity>
+        <activity android:name=".controllers.ScrollPictoPicturesActivity" />
+        <activity android:name=".controllers.CreateTreeActivity" />
         <activity android:name=".controllers.ScrollPictosActivity" />
         <activity
             android:name=".controllers.ClickPictosActivity"
@@ -40,13 +42,13 @@
             </intent-filter>
         </activity>
     </application>
+
     <uses-feature
         android:name="android.hardware.camera2.CameraManager"
         android:required="false" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

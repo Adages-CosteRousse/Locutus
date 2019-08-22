@@ -28,7 +28,7 @@ import fr.costerousse.locutus.models.Concept;
 import fr.costerousse.locutus.models.Profile;
 
 
-public class ScrollPictosActivity extends AppCompatActivity {
+public class ClickPictoPicturesActivity extends AppCompatActivity {
 	//////////////////////////////////////////////////////////
 	// Fields
 	/////////////
@@ -46,11 +46,6 @@ public class ScrollPictosActivity extends AppCompatActivity {
 	//
 	private MediaPlayer m_mediaPlayer = null;
 	private boolean m_play = true;
-	private boolean m_pause = false;
-	// Scrolling
-	private int m_currentConcept = 0;
-	private boolean m_scroll = true;
-	private Thread m_thread;
 	
 	//////////////////////////////////////////////////////////
 	// ON CREATE
@@ -59,28 +54,24 @@ public class ScrollPictosActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_work_pictos);
+		setContentView(R.layout.activity_click_picto_pictures);
 		
 		// Database
 		mDb = DatabaseClient.getInstance(getApplicationContext());
 		List<Concept> concepts = null;
 		try {
-			concepts = new GetConcepts().execute()
+			concepts = new ClickPictoPicturesActivity.GetConcepts().execute()
 					.get();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		
 		// Retrieves profile & preferences
 		try {
-			m_profile = new GetProfiles().execute()
+			m_profile = new ClickPictoPicturesActivity.GetProfiles().execute()
 					.get()
 					.get(getIntent().getIntExtra("profile_position", 0));
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		m_padding = m_profile.getFrameSize();
@@ -103,8 +94,6 @@ public class ScrollPictosActivity extends AppCompatActivity {
 		}
 		
 		// Retrieves view's items
-		LinearLayout linearLayoutWork = findViewById(R.id.linear_layout_work_pictos);
-		LinearLayout linearLayoutBottom = findViewById(R.id.linear_layout_work_pictos_bottom);
 		final ArrayList<LinearLayout> containers = new ArrayList<>();
 		final ArrayList<ImageView> foregrounds = new ArrayList<>();
 		final ArrayList<ImageView> imageViews = new ArrayList<>();
@@ -191,13 +180,12 @@ public class ScrollPictosActivity extends AppCompatActivity {
 		backgrounds.add(backgroundBottom4);
 		
 		// Processing on view
-		if (concepts != null && m_concepts.size() <= 4) {
-			linearLayoutBottom.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 0f));
-		}
 		for (int i = 0; i < m_concepts.size(); i++) {
 			final int position = i;
 			
 			containers.get(i)
+					.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
+			containers.get(i + 4)
 					.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
 			
 			imageViews.get(i)
@@ -207,36 +195,56 @@ public class ScrollPictosActivity extends AppCompatActivity {
 							// CONTAINER
 							int containerHeight = containers.get(position)
 									.getHeight();
+							int picContainerHeight = containers.get(position + 4)
+									.getHeight();
 							int containerWidth = containers.get(position)
 									.getWidth();
-							System.out.println("containerHeight : " + containerHeight + " containerWidth : " + containerWidth);
+							int picContainerWidth = containers.get(position + 4)
+									.getWidth();
 							
 							// IMAGE
 							int imageHeight = imageViews.get(position)
 									.getHeight();
+							int picImageHeight = imageViews.get(position + 4)
+									.getHeight();
 							int imageWidth = imageViews.get(position)
 									.getWidth();
-							System.out.println("imageHeight : " + imageHeight + " imageWidth : " + imageWidth);
+							int picImageWidth = imageViews.get(position + 4)
+									.getWidth();
 							
 							// DIF FOR PADDING
 							int difHeight = containerHeight - imageHeight;
 							int difWidth = containerWidth - imageWidth;
+							int difPicHeight = picContainerHeight - picImageHeight;
+							int difPicWidth = picContainerWidth - picImageWidth;
 							
 							if (difHeight * imageWidth / imageHeight > difWidth * imageHeight / imageWidth) {
 								int upDownPadding = ((containerHeight - (containerWidth * imageHeight / imageWidth)) / 2) + (m_gniddap * imageHeight / imageWidth);
-								System.out.println("upDownPadding : " + upDownPadding);
 								containers.get(position)
 										.setPadding(m_gniddap, upDownPadding, m_gniddap, upDownPadding);
 							} else if (difHeight * imageWidth / imageHeight < difWidth * imageHeight / imageWidth) {
 								int sidesPadding = ((containerWidth - (containerHeight * imageWidth / imageHeight)) / 2) + (m_gniddap * imageWidth / imageHeight);
-								System.out.println("sidesPadding : " + sidesPadding);
 								containers.get(position)
 										.setPadding(sidesPadding, m_gniddap, sidesPadding, m_gniddap);
 							} else {
 								containers.get(position)
 										.setPadding(m_gniddap * imageHeight / imageWidth, m_gniddap * imageWidth / imageHeight, m_gniddap * imageHeight / imageWidth, m_gniddap * imageWidth / imageHeight);
 							}
+							if (difPicHeight * picImageWidth / picImageHeight > difPicWidth * picImageHeight / picImageWidth) {
+								int picUpDownPadding = ((picContainerHeight - (picContainerWidth * picImageHeight / picImageWidth)) / 2) + (m_gniddap * picImageHeight / picImageWidth);
+								containers.get(position + 4)
+										.setPadding(m_gniddap, picUpDownPadding, m_gniddap, picUpDownPadding);
+							} else if (difPicHeight * picImageWidth / picImageHeight < difPicWidth * picImageHeight / picImageWidth) {
+								int sidesPicPadding = ((picContainerWidth - (picContainerHeight * picImageWidth / picImageHeight)) / 2) + (m_gniddap * picImageWidth / picImageHeight);
+								containers.get(position + 4)
+										.setPadding(sidesPicPadding, m_gniddap, sidesPicPadding, m_gniddap);
+							} else {
+								containers.get(position + 4)
+										.setPadding(m_gniddap * picImageHeight / picImageWidth, m_gniddap * picImageWidth / picImageHeight, m_gniddap * picImageHeight / picImageWidth, m_gniddap * picImageWidth / picImageHeight);
+							}
 							imageViews.get(position)
+									.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+							imageViews.get(position + 4)
 									.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 							
 							// FOREGROUND & BACKGROUND
@@ -244,51 +252,80 @@ public class ScrollPictosActivity extends AppCompatActivity {
 								case "classic":
 									imageViews.get(position)
 											.setPadding(m_padding, m_padding, m_padding, m_padding);
+									imageViews.get(position + 4)
+											.setPadding(m_padding, m_padding, m_padding, m_padding);
 									switch (m_profile.getFrameColor()) {
 										case "black":
 											backgrounds.get(position)
+													.setBackgroundColor(Color.BLACK);
+											backgrounds.get(position + 4)
 													.setBackgroundColor(Color.BLACK);
 											break;
 										case "cyan":
 											backgrounds.get(position)
 													.setBackgroundColor(Color.CYAN);
+											backgrounds.get(position + 4)
+													.setBackgroundColor(Color.CYAN);
 											break;
 										case "green":
 											backgrounds.get(position)
+													.setBackgroundColor(Color.GREEN);
+											backgrounds.get(position + 4)
 													.setBackgroundColor(Color.GREEN);
 											break;
 										case "pink":
 											backgrounds.get(position)
 													.setBackgroundColor(getResources().getColor(R.color.pink));
+											backgrounds.get(position + 4)
+													.setBackgroundColor(getResources().getColor(R.color.pink));
 											break;
 										case "yellow":
 											backgrounds.get(position)
 													.setBackgroundColor(getResources().getColor(R.color.yellow));
+											backgrounds.get(position + 4)
+													.setBackgroundColor(getResources().getColor(R.color.yellow));
 											break;
 										default:
 											backgrounds.get(position)
+													.setBackgroundColor(Color.RED);
+											backgrounds.get(position + 4)
 													.setBackgroundColor(Color.RED);
 									}
 									break;
 								case "highlighting":
 									foregrounds.get(position)
 											.setBackgroundColor(getResources().getColor(R.color.yellow));
+									foregrounds.get(position + 4)
+											.setBackgroundColor(getResources().getColor(R.color.yellow));
 									foregrounds.get(position)
 											.getBackground()
 											.setAlpha(m_profile.getHighlightIntensity() * 2);
+									foregrounds.get(position + 4)
+											.getBackground()
+											.setAlpha(m_profile.getHighlightIntensity() * 2);
 									foregrounds.get(position)
+											.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+									foregrounds.get(position + 4)
 											.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 									break;
 								case "redLight":
 									foregrounds.get(position)
 											.setBackground(getResources().getDrawable(R.drawable.img_red_light));
+									foregrounds.get(position + 4)
+											.setBackground(getResources().getDrawable(R.drawable.img_red_light));
 									foregrounds.get(position)
+											.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+									foregrounds.get(position + 4)
 											.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 									break;
 								case "checkerboard":
 									imageViews.get(position)
 											.setPadding(m_padding, m_padding, m_padding, m_padding);
+									imageViews.get(position + 4)
+											.setPadding(m_padding, m_padding, m_padding, m_padding);
 									backgrounds.get(position)
+											.setBackground(getResources().getDrawable(R.drawable.img_checkerboard));
+									backgrounds.get(position + 4)
 											.setBackground(getResources().getDrawable(R.drawable.img_checkerboard));
 									break;
 							}
@@ -303,9 +340,7 @@ public class ScrollPictosActivity extends AppCompatActivity {
 							.setImageResource(R.drawable.class.getField(m_concepts.get(i)
 									.getPicto())
 									.getInt(R.drawable.class));
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (NoSuchFieldException e) {
+				} catch (IllegalAccessException | NoSuchFieldException e) {
 					e.printStackTrace();
 				}
 			} else {
@@ -313,168 +348,123 @@ public class ScrollPictosActivity extends AppCompatActivity {
 						.setImageDrawable(Drawable.createFromPath(m_concepts.get(i)
 								.getPicto()));
 			}
-			
-			linearLayoutWork.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View view, MotionEvent motionEvent) {
-					if (m_play) {
-						if (m_mediaPlayer != null) {
-							m_mediaPlayer.release();
-						}
-						if (m_concepts.get(m_currentConcept)
-								.getSound()
-								.startsWith("sound_")) {
-							try {
-								m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(m_currentConcept)
-										.getSound())
-										.getInt(R.raw.class));
-							} catch (IllegalAccessException e) {
-								e.printStackTrace();
-							} catch (NoSuchFieldException e) {
-								e.printStackTrace();
-							}
-						} else {
-							m_mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(m_concepts.get(m_currentConcept)
-									.getSound())));
-						}
-						if (m_mediaPlayer != null) {
-							m_mediaPlayer.start();
-						}
-						m_play = false;
-					}
-					
-					if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-						m_play = true;
-					}
-					
-					return true;
-				}
-			});
-		}
-		
-		// SCROLLING
-		m_thread = new Thread(new Runnable() {
-			@Override
-			public void run() {
+			if (m_concepts.get(i)
+					.getPicture()
+					.startsWith("dra_")) {
 				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
+					imageViews.get(i + 4)
+							.setImageResource(R.drawable.class.getField(m_concepts.get(i)
+									.getPicture())
+									.getInt(R.drawable.class));
+				} catch (IllegalAccessException | NoSuchFieldException e) {
 					e.printStackTrace();
 				}
-				
-				while (m_scroll) {
-					if (!m_pause) {
-						// PLAY SOUND
-						if (m_concepts.get(m_currentConcept)
-								.getSound()
-								.startsWith("sound_")) {
-							try {
-								m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(m_currentConcept)
-										.getSound())
-										.getInt(R.raw.class));
-								m_mediaPlayer.setVolume(0.4f, 0.4f);
-							} catch (IllegalAccessException e) {
-								e.printStackTrace();
-							} catch (NoSuchFieldException e) {
-								e.printStackTrace();
-							}
-						} else {
-							m_mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(m_concepts.get(m_currentConcept)
-									.getSound())));
-						}
-						if (m_mediaPlayer != null) {
-							m_mediaPlayer.start();
-							m_mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-								@Override
-								public void onCompletion(MediaPlayer mediaPlayer) {
+			} else {
+				imageViews.get(i + 4)
+						.setImageDrawable(Drawable.createFromPath(m_concepts.get(i)
+								.getPicture()));
+			}
+			
+			imageViews.get(i)
+					.setOnTouchListener(new View.OnTouchListener() {
+						@Override
+						public boolean onTouch(View view, MotionEvent motionEvent) {
+							if (m_play) {
+								if (m_mediaPlayer != null) {
 									m_mediaPlayer.release();
 								}
-							});
-						}
-						
-						// UPDATE UI -> MAKES FRAME VISIBLE
-						runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								System.out.println(m_currentConcept);
-								if (m_profile.getFrameStyle()
-										.equals("classic") || m_profile.getFrameStyle()
-										.equals("checkerboard")) {
-									backgrounds.get(m_currentConcept)
-											.setVisibility(View.VISIBLE);
+								if (m_concepts.get(position)
+										.getSound()
+										.startsWith("sound_")) {
+									try {
+										m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(position)
+												.getSound())
+												.getInt(R.raw.class));
+									} catch (IllegalAccessException | NoSuchFieldException e) {
+										e.printStackTrace();
+									}
 								} else {
-									foregrounds.get(m_currentConcept)
-											.setVisibility(View.VISIBLE);
+									m_mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(m_concepts.get(position)
+											.getSound())));
 								}
+								if (m_mediaPlayer != null) {
+									m_mediaPlayer.start();
+								}
+								m_play = false;
 							}
-						});
-						
-						// SLEEP
-						try {
-							Thread.sleep(m_profile.getScrollingTime() * 1000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+							
+							if (m_profile.getFrameStyle()
+									.equals("classic") || m_profile.getFrameStyle()
+									.equals("checkerboard")) {
+								backgrounds.get(position)
+										.setVisibility(View.VISIBLE);
+							} else {
+								foregrounds.get(position)
+										.setVisibility(View.VISIBLE);
+							}
+							
+							if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+								backgrounds.get(position)
+										.setVisibility(View.INVISIBLE);
+								foregrounds.get(position)
+										.setVisibility(View.INVISIBLE);
+								m_play = true;
+							}
+							
+							return true;
 						}
-						
-						// RE-UPDATE UI -> MAKES FRAME INVISIBLE
-						runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								System.out.println("blablabla");
-								backgrounds.get(m_currentConcept)
-										.setVisibility(View.INVISIBLE);
-								foregrounds.get(m_currentConcept)
-										.setVisibility(View.INVISIBLE);
-								
-								// INCREMENT CONCEPT TO PLAY
-								if (m_currentConcept == m_concepts.size() - 1) {
-									m_currentConcept = 0;
+					});
+			
+			imageViews.get(i + 4)
+					.setOnTouchListener(new View.OnTouchListener() {
+						@Override
+						public boolean onTouch(View view, MotionEvent motionEvent) {
+							if (m_play) {
+								if (m_mediaPlayer != null) {
+									m_mediaPlayer.release();
+								}
+								if (m_concepts.get(position)
+										.getSound()
+										.startsWith("sound_")) {
+									try {
+										m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(position)
+												.getSound())
+												.getInt(R.raw.class));
+									} catch (IllegalAccessException | NoSuchFieldException e) {
+										e.printStackTrace();
+									}
 								} else {
-									m_currentConcept++;
+									m_mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(m_concepts.get(position)
+											.getSound())));
 								}
+								if (m_mediaPlayer != null) {
+									m_mediaPlayer.start();
+								}
+								m_play = false;
 							}
-						});
-						
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+							
+							if (m_profile.getFrameStyle()
+									.equals("classic") || m_profile.getFrameStyle()
+									.equals("checkerboard")) {
+								backgrounds.get(position + 4)
+										.setVisibility(View.VISIBLE);
+							} else {
+								foregrounds.get(position + 4)
+										.setVisibility(View.VISIBLE);
+							}
+							
+							if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+								backgrounds.get(position + 4)
+										.setVisibility(View.INVISIBLE);
+								foregrounds.get(position + 4)
+										.setVisibility(View.INVISIBLE);
+								m_play = true;
+							}
+							
+							return true;
 						}
-					} else {
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-				
-				Thread.currentThread()
-						.interrupt();
-			}
-		});
-		
-		m_thread.start();
-	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		m_pause = false;
-		System.out.println(m_thread.isAlive());
-	}
-	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		m_mediaPlayer.release();
-		m_pause = true;
-	}
-	
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		m_scroll = false;
+					});
+		}
 	}
 	
 	//////////////////////////////////////////////////////////

@@ -55,26 +55,24 @@ public class PictosActivity extends AppCompatActivity {
 		// Retrieves database & related
 		mDb = DatabaseClient.getInstance(getApplicationContext());
 		m_profilePosition = getIntent().getIntExtra(PROFILE_POSITION, 0);
+		
 		// GetProfiles
 		System.out.println("profile_position" + m_profilePosition);
 		try {
 			m_profile = new GetProfiles().execute()
 					.get()
 					.get(m_profilePosition);
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		m_maxFrames = m_profile.getMaxFramesPerDisplay();
+		
 		// GetConcepts and execute it's tasks
 		try {
 			List<Concept> tempList = new GetConcepts().execute()
 					.get();
 			m_arraySize = tempList.size();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		
@@ -83,7 +81,6 @@ public class PictosActivity extends AppCompatActivity {
 		for (int i = 0; i < m_arraySize; i++) {
 			m_concepts.add(i, 0);
 		}
-		System.out.println(m_concepts);
 		
 		// Retrieves view's items
 		m_textViewConceptsCount = findViewById(R.id.text_view_pick_concepts);
@@ -95,7 +92,6 @@ public class PictosActivity extends AppCompatActivity {
 		// Ties adapter to listview
 		adapter = new PickConceptsAdapter(this, new ArrayList<Concept>());
 		m_listViewConcepts.setAdapter(adapter);
-		m_listViewConcepts.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		
 		//////////////////////////////////////////////////////////
 		// SET ON ITEM CLICK LISTENER
