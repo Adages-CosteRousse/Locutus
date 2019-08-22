@@ -1,8 +1,10 @@
 package fr.costerousse.locutus.controllers;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import fr.costerousse.locutus.R;
 
@@ -13,4 +15,12 @@ public class CreateTreeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_tree);
     }
+	
+	public void newTreeConfirm(View view) {
+	
+	}
+	
+	public void back(View view) {
+	
+	}
 }

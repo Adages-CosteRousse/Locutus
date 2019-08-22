@@ -94,4 +94,13 @@
     <string name="play_recorded">Jouer l\'enregistrement</string>
     <string name="save_record">Sauvegarder l\'enregistrement</string>
     <string name="recording_complete">Enregistrement terminé</string>
+    <string name="concept_click_long_click">Reste appuyé pour accéder au concept et à ses options</string>
+    <string name="confirm_concept_deletion">Voulez-vous vraiment supprimer ce concept ?</string>
+    <string name="concept_deleted">Concept supprimé</string>
+    <string name="resources_management">Gestion des ressources</string>
+    <string name="delete">Supprimer</string>
+    <string name="select_concepts">Choisir les concepts</string>
+    <string name="concept_count">Nombre de concepts : %d/%d</string>
+    <string name="at_least_one_concept">Veuillez choisir au moins un concept</string>
+    <string name="create_tree">Création d\'une nouvelle arborescence</string>
 </resources>
