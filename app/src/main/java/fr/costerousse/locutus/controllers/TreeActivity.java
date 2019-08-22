@@ -9,6 +9,12 @@ import fr.costerousse.locutus.R;
 
 
 public class TreeActivity extends AppCompatActivity {
+	//////////////////////////////////////////////////////////
+	// Fields
+	/////////////
+	// Intent
+	public static final String TREE_POSITION = "tree_position";
+	private int m_treePosition;
 	
 	//////////////////////////////////////////////////////////
 	// ON CREATE

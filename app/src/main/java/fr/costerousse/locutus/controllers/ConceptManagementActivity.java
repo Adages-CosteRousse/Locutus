@@ -104,8 +104,6 @@ public class ConceptManagementActivity extends AppCompatActivity {
 				return false;
 			}
 		});
-		
-		
 	}
 	
 	//////////////////////////////////////////////////////////

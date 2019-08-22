@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity(tableName = "tree",
-        indices = {@Index(value = {"name", "concepts"},
+        indices = {@Index(value = {"name", "concept", "concepts"},
         unique = true)})
 public class Tree implements Serializable {
     //////////
@@ -19,6 +19,9 @@ public class Tree implements Serializable {
 
     @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "concept")
+    private String concept;
 
     @ColumnInfo(name = "concepts")
     private String concepts;
@@ -40,6 +43,14 @@ public class Tree implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getConcept() {
+        return concept;
+    }
+
+    public void setConcept(String concept) {
+        this.concept = concept;
     }
 
     public String getConcepts() {
