@@ -54,7 +54,7 @@ public class ClickPictoPicturesActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_click_picto_pictures);
+		setContentView(R.layout.activity_work_picto_pictures);
 		
 		// Database
 		mDb = DatabaseClient.getInstance(getApplicationContext());

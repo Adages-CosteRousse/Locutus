@@ -67,9 +67,7 @@ public class ScrollPictosActivity extends AppCompatActivity {
 		try {
 			concepts = new GetConcepts().execute()
 					.get();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		
@@ -78,9 +76,7 @@ public class ScrollPictosActivity extends AppCompatActivity {
 			m_profile = new GetProfiles().execute()
 					.get()
 					.get(getIntent().getIntExtra("profile_position", 0));
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}
 		m_padding = m_profile.getFrameSize();
@@ -303,9 +299,7 @@ public class ScrollPictosActivity extends AppCompatActivity {
 							.setImageResource(R.drawable.class.getField(m_concepts.get(i)
 									.getPicto())
 									.getInt(R.drawable.class));
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (NoSuchFieldException e) {
+				} catch (IllegalAccessException | NoSuchFieldException e) {
 					e.printStackTrace();
 				}
 			} else {
@@ -328,9 +322,7 @@ public class ScrollPictosActivity extends AppCompatActivity {
 								m_mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.class.getField(m_concepts.get(m_currentConcept)
 										.getSound())
 										.getInt(R.raw.class));
-							} catch (IllegalAccessException e) {
-								e.printStackTrace();
-							} catch (NoSuchFieldException e) {
+							} catch (IllegalAccessException | NoSuchFieldException e) {
 								e.printStackTrace();
 							}
 						} else {
@@ -373,9 +365,7 @@ public class ScrollPictosActivity extends AppCompatActivity {
 										.getSound())
 										.getInt(R.raw.class));
 								m_mediaPlayer.setVolume(0.4f, 0.4f);
-							} catch (IllegalAccessException e) {
-								e.printStackTrace();
-							} catch (NoSuchFieldException e) {
+							} catch (IllegalAccessException | NoSuchFieldException e) {
 								e.printStackTrace();
 							}
 						} else {
