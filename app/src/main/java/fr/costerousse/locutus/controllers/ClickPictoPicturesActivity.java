@@ -398,15 +398,24 @@ public class ClickPictoPicturesActivity extends AppCompatActivity {
 									.equals("checkerboard")) {
 								backgrounds.get(position)
 										.setVisibility(View.VISIBLE);
+								backgrounds.get(position + 4)
+										.setVisibility(View.VISIBLE);
 							} else {
 								foregrounds.get(position)
+										.setVisibility(View.VISIBLE);
+								foregrounds.get(position + 4)
 										.setVisibility(View.VISIBLE);
 							}
 							
 							if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
 								backgrounds.get(position)
 										.setVisibility(View.INVISIBLE);
+								backgrounds.get(position + 4)
+										.setVisibility(View.INVISIBLE);
+								
 								foregrounds.get(position)
+										.setVisibility(View.INVISIBLE);
+								foregrounds.get(position + 4)
 										.setVisibility(View.INVISIBLE);
 								m_play = true;
 							}
@@ -446,15 +455,24 @@ public class ClickPictoPicturesActivity extends AppCompatActivity {
 							if (m_profile.getFrameStyle()
 									.equals("classic") || m_profile.getFrameStyle()
 									.equals("checkerboard")) {
+								backgrounds.get(position)
+										.setVisibility(View.VISIBLE);
 								backgrounds.get(position + 4)
 										.setVisibility(View.VISIBLE);
 							} else {
+								foregrounds.get(position)
+										.setVisibility(View.VISIBLE);
 								foregrounds.get(position + 4)
 										.setVisibility(View.VISIBLE);
 							}
 							
 							if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+								backgrounds.get(position)
+										.setVisibility(View.INVISIBLE);
 								backgrounds.get(position + 4)
+										.setVisibility(View.INVISIBLE);
+								
+								foregrounds.get(position)
 										.setVisibility(View.INVISIBLE);
 								foregrounds.get(position + 4)
 										.setVisibility(View.INVISIBLE);

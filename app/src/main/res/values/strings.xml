@@ -102,4 +102,5 @@
     <string name="concept_count">Nombre de concepts : %d/%d</string>
     <string name="at_least_one_concept">Veuillez choisir au moins un concept</string>
     <string name="create_tree">Création d\'une nouvelle arborescence</string>
+    <string name="no_picture">Pas d\'image disponible. Cliquez pour en ajouter une</string>
 </resources>

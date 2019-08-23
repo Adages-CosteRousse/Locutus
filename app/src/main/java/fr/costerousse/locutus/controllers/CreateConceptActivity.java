@@ -447,14 +447,11 @@ public class CreateConceptActivity extends AppCompatActivity {
 	// Tests errors (calling GetConcepts) then calls SAVE CONCEPT or TOAST error
 	/////////////
 	public void newConceptConfirm(View view) {
-		System.out.println("CreateConceptActivity : newConceptConfirm");
 		if (TextUtils.isEmpty(m_editTextConceptName.getText()
 				.toString()) || m_picto == null || (m_sound == null && m_soundPath == null && m_soundUri == null)) {
-			System.out.println("CreateConceptActivity : newConceptConfirm : non-filled");
 			Toast.makeText(getApplicationContext(), R.string.please_fill_required_fields, Toast.LENGTH_LONG)
 					.show();
 		} else {
-			System.out.println("CreateConceptActivity : newConceptConfirm : filled");
 			boolean conceptExist = false;
 			for (int i = 0; i < m_concepts.size(); i++) {
 				if (m_editTextConceptName.getText()
@@ -463,11 +460,9 @@ public class CreateConceptActivity extends AppCompatActivity {
 						.equals(m_concepts.get(i)
 								.getName())) {
 					conceptExist = true;
-					System.out.println("CreateConceptActivity : newConceptConfirm : filled : conceptExists");
 				}
 			}
 			if (!conceptExist) {
-				System.out.println("CreateConceptActivity : newConceptConfirm : filled : !conceptExists");
 				m_destroyPicto = false;
 				m_destroyPicture = false;
 				// SAVING SOUND FILE ON INTERNAL STORAGE

@@ -2,6 +2,7 @@ package fr.costerousse.locutus.adapters;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,11 @@ import fr.costerousse.locutus.R;
 import fr.costerousse.locutus.models.Concept;
 
 
-public class PickConceptsAdapter extends ArrayAdapter<Concept> {
+public class PickConceptsWithPictureAdapter extends ArrayAdapter<Concept> {
 	//////////////////////////////////////////////////////////
 	// Constructor
 	/////////////
-	public PickConceptsAdapter(Context context, List<Concept> concepts) {
+	public PickConceptsWithPictureAdapter(Context context, List<Concept> concepts) {
 		super(context, R.layout.template_pick_concepts, concepts);
 	}
 	
@@ -63,6 +64,11 @@ public class PickConceptsAdapter extends ArrayAdapter<Concept> {
 				holder.m_imageView.setImageDrawable(Drawable.createFromPath(concept.getPicto()));
 			}
 			holder.m_textView.setText(concept.getName());
+			if (concept.getPicture().equals("none")) {
+				String temp = concept.getName() + " /!\\ " + getContext().getResources().getString(R.string.no_picture);
+				holder.m_textView.setText(temp);
+				holder.m_textView.setTextColor(Color.GRAY);
+			}
 		}
 		
 		return convertView;
